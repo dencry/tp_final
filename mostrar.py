@@ -12,7 +12,7 @@ def menu_pricipal():
 3. Actualizar un producto
 4. Eliminar un producto
 5. Buscar un producto por ID
-6. Informacion de Stock
+6. Reporte de stock
 {"":=^32}
 7. Salir""")
     
@@ -44,9 +44,6 @@ def mostrar_lista_de_productos():
         for producto in productos:
             print(Fore.WHITE + f"ID: {producto[0]}, Nombre: {producto[1]}, Precio: ${producto[2]}, Stock: {producto[3]} u., Categoria: {producto[4]}, Descripcion: {producto[5]}.")
 
-        # Cerrar coneccion
-        conexion.close()
-
         return productos
 
     except sqlite3.Error as e:
@@ -66,7 +63,7 @@ def mostrar_producto_por_id():
         
     try:
         # Id del producto a mostrar
-        id_producto = input("\nIngrese el ID del producto: ")
+        id_producto = input("\nIngrese el ID del producto: ").strip()
 
         if not id_producto.isdigit():
             print(Fore.RED + "\n[ERROR] El ID ingresado no es valido.")
@@ -75,17 +72,16 @@ def mostrar_producto_por_id():
         id_producto = int(id_producto)
 
         # Verificar si el producto en la base de datos
-        cursor.execute("SELECT nombre, categoria FROM productos WHERE id = ?", (id_producto,))
+        cursor.execute("SELECT nombre, precio, stock, categoria, descripcion FROM productos WHERE id = ?", (id_producto,))
         producto = cursor.fetchone()
 
         if not producto:
             print(Fore.YELLOW + "\nNo se encontro el producto en la base de datos.")
             return
         
-        print(Fore.WHITE + f"\nNombre: {producto[0]} Categoria: {producto[1]}.")
+        print(Fore.CYAN + f"\n=== Informacion de productos con el ID {id_producto} ===")
 
-        # Cerrar coneccion
-        conexion.close()
+        print(Fore.WHITE + f"\nNombre: {producto[0]}, Precio: ${producto[1]}, Stock: {producto[2]}u., Categoria: {producto[3]}, Descripcion: {producto[4]}.")
 
     except sqlite3.Error as e:
         print(Fore.RED + f"[ERROR] Se produjo un error: {e}")
@@ -94,4 +90,37 @@ def mostrar_producto_por_id():
         conexion.close()
 
 def reporte_de_productos():
-    pass
+    """
+    Reporte de productos que tengan una cantidad igual o inferior a un límite especificado por el usuario 
+    """
+
+    # Sincronizar con la Base de datos
+    conexion = sqlite3.connect("productos.db")
+    cursor = conexion.cursor()
+
+    try:
+        limite = input("\nIngrese el límite de stock: ").strip()
+
+        if not limite.isdigit():
+            print(Fore.RED + "\n[ERROR] El límite debe ser un número entero positivo.")
+            return
+
+        limite = int(limite)
+
+        cursor.execute("SELECT id, nombre, precio, stock, categoria, descripcion FROM productos WHERE stock <= ? ", (limite,))
+        productos = cursor.fetchall()
+
+        if not productos:
+            print(Fore.YELLOW + f"\nNo hay productos con stock menor o igual a {limite} u.")
+            return
+
+        print(Fore.CYAN + f"\n=== Productos con stock menor o igual a {limite}u. ===\n")
+
+        for producto in productos:
+            print(Fore.WHITE + f"ID: {producto[0]}, Nombre: {producto[1]}, Precio: ${producto[2]}, Stock: {producto[3]}u., Categoria: {producto[4]}, Descripcion: {producto[5]}.")
+
+    except sqlite3.Error as e:
+        print(Fore.RED + f"[ERROR] Se produjo un error: {e}")
+
+    finally:
+        conexion.close()
