@@ -20,13 +20,15 @@ def eliminar_un_producto():
             print(Fore.YELLOW + "\n[INFO] No hay productos registrados en la base de datos.")
             return
 
-        #Id del producto a eliminar
+        # Id del producto a eliminar
         id_producto = input("\nIngrese el ID del producto a 'ELIMINAR': ")
 
+        # Verifico que sea numero
         if not id_producto.isdigit():
             print(Fore.RED + "\n[ERROR] El ID ingresado no es valido.")
             return
         
+        # Cambio de str a int
         id_producto = int(id_producto)
 
         # Verificar si el producto en la base de datos
@@ -38,17 +40,17 @@ def eliminar_un_producto():
             print(Fore.YELLOW + "\nNo se encontro el producto en la base de datos.")
             return
         
-        #Confirmar antes de eliminar
+        # Confirmar antes de eliminar
         confirmar = input(Fore.YELLOW + f"¿Esta seguro que quiere eliminar el producto {producto[0]} {producto[1]}? (S/N): ").strip().lower()
 
         if "" != confirmar != "s":
             print(Fore.GREEN + "\nLa eliminacion del producto ah sido cancelada.")
             return
 
-        #Eliminar el producto
+        # Eliminar el producto
         cursor.execute("DELETE FROM productos WHERE id = ?", (id_producto,))
 
-        #Confirmar la transacción
+        # Confirmar la transacción
         conexion.commit()
 
         print(Fore.GREEN + f"\n[EXITO] El producto '{producto[0]}' '{producto[1]}' fue eliminado correctamente.")
