@@ -6,12 +6,14 @@ from colorama import Fore, init
 init(autoreset=True)
 
 def main():
-
+    # Creo la base de datoy y la lista
     crear.crear_db()
 
     while True:
+        # Mostro un menu
         mostrar.menu_pricipal()
 
+        # Pido al usuario que ingrese una opcion
         opcion = input("\nElige una opción: ")
 
         if opcion == "1":
