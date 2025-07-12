@@ -8,7 +8,7 @@ def eliminar_un_producto():
     Permite eliminar un producto de la lista
     """
 
-    #conectar a la base de datos
+    # Conectar a la base de datos
     conexion = sqlite3.connect("productos.db")
     cursor = conexion.cursor()
 
