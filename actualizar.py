@@ -83,6 +83,8 @@ def actualizar_un_producto():
 
             # Actualizar el stock del producto
             cursor.execute('UPDATE productos SET stock = ? WHERE id = ?', (nuevo_stock, id_producto))
+
+            #Confirmar la transacción
             conexion.commit()
 
             print(Fore.GREEN + f"\n[EXITO] El producto '{producto[0]}' '{producto[1]}' fue actualizado correctamente.")

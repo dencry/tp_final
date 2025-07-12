@@ -47,6 +47,8 @@ def eliminar_un_producto():
 
         #Eliminar el producto
         cursor.execute("DELETE FROM productos WHERE id = ?", (id_producto,))
+
+        #Confirmar la transacción
         conexion.commit()
 
         print(Fore.GREEN + f"\n[EXITO] El producto '{producto[0]}' '{producto[1]}' fue eliminado correctamente.")
