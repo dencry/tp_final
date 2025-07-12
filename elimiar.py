@@ -30,10 +30,10 @@ def eliminar_un_producto():
         id_producto = int(id_producto)
 
         # Verificar si el producto en la base de datos
-
         cursor.execute("SELECT nombre, categoria FROM productos WHERE id = ?", (id_producto,))
         producto = cursor.fetchone()
 
+        # Mostrar un mensaje si no se encontro
         if not producto:
             print(Fore.YELLOW + "\nNo se encontro el producto en la base de datos.")
             return
