@@ -32,6 +32,14 @@ def main():
             elimiar.eliminar_un_producto()
 
         elif opcion == "5":
+            # Buscar un producto por ID
+            mostrar.mostrar_producto_por_id()
+
+        elif opcion == "6":
+            # Eliminar un producto
+            mostrar.reporte_de_productos()
+
+        elif opcion == "7":
             # Salis del programa
             print(Fore.GREEN + "\nGracias por ultilizar el sistema. ¡Hasta luego!\n")
             break
