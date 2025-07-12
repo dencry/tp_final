@@ -34,7 +34,6 @@ def mostrar_lista_de_productos():
     cursor = conexion.cursor()
 
     try:
-
         cursor.execute("SELECT id, nombre, precio, stock, categoria, descripcion FROM productos")
         productos = cursor.fetchall()
 
