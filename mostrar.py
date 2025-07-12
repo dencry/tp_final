@@ -17,7 +17,7 @@ def menu_pricipal():
 7. Salir""")
     
 def menu_actualizar():
-    print(Fore.WHITE + """{"":=^32}
+    print(Fore.WHITE + f"""{"":=^32}
 \n¿Que desea actualizar?
 {"":=^32}
 1. Actualizar precio
