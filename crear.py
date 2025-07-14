@@ -40,15 +40,21 @@ def cargar_producto():
 
         #Solicitar datos con validaciones vasicas
         nombre = input("Ingrese el nombre del producto: ").strip().capitalize()
-        descripcion = input("Ingrese la descripcion del producto: ")
-        stock = input("Ingrese la cantidad del producto: ").strip()
+        descripcion = input("Ingrese una breve descripción del producto: ")
+        stock = input("Ingrese la cantidad disponible del producto: ").strip()
         precio = input("Ingrese el precio del producto: ").strip()
-        categoria = input("Ingrese la categoria del producto: ").strip().lower()
+        categoria = input("Ingrese la cantidad disponible del producto: ").strip().lower()
 
         #Validacion
-        if not nombre or not descripcion or not categoria:
+        if not nombre:
             print(Fore.RED + "\n[ERROR] EL nombre, descripcion y categotia no pueden estar vacíos.")
             return
+
+        if not descripcion:
+            descripcion = "nulo"
+
+        if not categoria:
+            categoria = "nulo"
 
         if not stock.isdigit() or not precio.isdigit():
             print(Fore.RED + "\n[ERROR] La Cantidad/Precio debe ser numerico.")
