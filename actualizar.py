@@ -30,7 +30,7 @@ def actualizar_un_producto():
         id_producto = int(id_producto)
 
         # Verificar si el producto esta en la base de datos
-        cursor.execute("SELECT nombre, categoria FROM productos WHERE id = ?", (id_producto,))
+        cursor.execute('''SELECT nombre, categoria FROM productos WHERE id = ?''', (id_producto,))
         producto = cursor.fetchone()
 
         if not producto:
@@ -59,7 +59,7 @@ def actualizar_un_producto():
                 return
 
             # Actualizar el precio del producto
-            cursor.execute('UPDATE productos SET precio = ? WHERE id = ?', (nuevo_precio, id_producto))
+            cursor.execute('''UPDATE productos SET precio = ? WHERE id = ?''', (nuevo_precio, id_producto))
             conexion.commit()
 
             print(Fore.GREEN + f"\n[EXITO] El producto '{producto[0]}' '{producto[1]}' fue actualizado correctamente.")
@@ -82,7 +82,7 @@ def actualizar_un_producto():
                 return
 
             # Actualizar el stock del producto
-            cursor.execute('UPDATE productos SET stock = ? WHERE id = ?', (nuevo_stock, id_producto))
+            cursor.execute('''UPDATE productos SET stock = ? WHERE id = ?''', (nuevo_stock, id_producto))
 
             #Confirmar la transacción
             conexion.commit()
