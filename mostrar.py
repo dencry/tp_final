@@ -21,8 +21,7 @@ def menu_actualizar():
 \n¿Que desea actualizar?
 {"":=^32}
 1. Actualizar precio
-2. Actualizar Stock
-""")
+2. Actualizar Stock""")
 
 def mostrar_lista_de_productos():
     """
