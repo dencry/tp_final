@@ -10,11 +10,11 @@ def registro(mensaje):
         archivo.close()
 
 def crear_db():
-    #Conexion a la base de datos
+    # Conexion a la base de datos
     conexion = sqlite3.connect("productos.db")
     cursor = conexion.cursor()
 
-    #Crear tabla si no existe
+    # Crear tabla si no existe
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS productos (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -51,6 +51,10 @@ def cargar_producto(nombre, stock, precio, descripcion= "None", categoria = "Non
         
         if not precio.isdigit():
             print(Fore.RED + "\n[ERROR] El precio debe ser numerico.")
+            return
+        
+        if precio < 0 or stock <= 0:
+            print(Fore.RED +"\n[ERROR] El producto/cantidad no deven se menos o igual a 0.")
             return
         
         stock, precio = int(stock), float(precio)

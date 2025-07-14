@@ -97,9 +97,7 @@ def mostrar_producto_por_id():
         conexion.close()
 
 def reporte_de_productos():
-    """
-    Reporte de productos que tengan una cantidad igual o inferior a un límite especificado por el usuario 
-    """
+    """ Reporte de productos que tengan una cantidad igual o inferior a un límite especificado por el usuario """
 
     # Sincronizar con la Base de datos
     conexion = sqlite3.connect("productos.db")
