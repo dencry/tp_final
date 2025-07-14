@@ -75,7 +75,7 @@ def actualizar_un_producto():
             nuevo_stock = int(nuevo_stock)
             
             #Confirmar antes la actualizaciion
-            confirmar = input(Fore.YELLOW + f"\n¿Esta seguro que quiere 'ACTUALIZAR' el producto {producto[0]} {producto[1]}? (S/N): ").strip().lower()
+            confirmar = input(Fore.YELLOW + f"\n¿Esta seguro que quiere 'ACTUALIZAR' el producto '{producto[0]}' '{producto[1]}' a {nuevo_stock}u.? (S/N): ").strip().lower()
 
             if "" != confirmar != "s":
                 print(Fore.GREEN + "\nLa actualización ah sido cancelada.")
