@@ -18,7 +18,7 @@ def main():
 
         if opcion == "1":
             # Regristrar un nuevo producto
-            crear.cargar_producto()
+            mostrar.registrar()
 
         elif opcion == "2":
             # Mostrar productos registrados

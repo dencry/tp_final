@@ -1,4 +1,4 @@
-import sqlite3
+import sqlite3, mostrar
 from colorama import Fore, init
 
 init(autoreset=True)
@@ -26,7 +26,7 @@ def crear_db():
 
     print(Fore.GREEN + "\n[INFO] La base de datos fue creada con exito!")
 
-def cargar_producto():
+def cargar_producto(nombre, stock, precio, descripcion= "None", categoria = "None"):
     """
     Solicitar los datos del producto y registrarlo en la base de datos, validando la entrada.
     """
@@ -36,25 +36,10 @@ def cargar_producto():
     cursor = conexion.cursor()
 
     try:
-        print(Fore.CYAN +  "\n=== 'REGISTAR' un nuevo producto ===\n")
-
-        #Solicitar datos con validaciones vasicas
-        nombre = input("Ingrese el nombre del producto: ").strip().capitalize()
-        descripcion = input("Ingrese una breve descripción del producto: ")
-        stock = input("Ingrese la cantidad disponible del producto: ").strip()
-        precio = input("Ingrese el precio del producto: ").strip()
-        categoria = input("Ingrese la cantidad disponible del producto: ").strip().lower()
-
         #Validacion
         if not nombre:
             print(Fore.RED + "\n[ERROR] EL nombre no pueden estar vacíos.")
             return
-
-        if not descripcion:
-            descripcion = "nulo"
-
-        if not categoria:
-            categoria = "nulo"
 
         if not stock.isdigit() or not precio.isdigit():
             print(Fore.RED + "\n[ERROR] La Cantidad/Precio debe ser numerico.")

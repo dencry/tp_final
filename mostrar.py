@@ -1,4 +1,4 @@
-import sqlite3
+import sqlite3, crear
 from colorama import Fore, init
 
 init(autoreset=True)
@@ -18,10 +18,22 @@ def menu_pricipal():
     
 def menu_actualizar():
     print(Fore.WHITE + f"""{"":=^32}
-\n¿Que desea actualizar?
+¿Que desea actualizar?
 {"":=^32}
 1. Actualizar precio
 2. Actualizar Stock""")
+    
+def registrar():
+    # Muestro un menu para registrar un producto
+    print(Fore.CYAN +  "\n=== 'REGISTAR' un nuevo producto ===\n")
+    #Solicitar datos con validaciones vasicas
+    nombre = input("Ingrese el nombre del producto: ").strip().capitalize()
+    descripcion = input("Ingrese una breve descripción del producto: ")
+    stock = input("Ingrese la cantidad disponible del producto: ").strip()
+    precio = input("Ingrese el precio del producto: ").strip()
+    categoria = input("Ingrese la cantidad disponible del producto: ").strip().lower()
+
+    crear.cargar_producto(nombre, descripcion, stock, precio, categoria)
 
 def mostrar_lista_de_productos():
     """
