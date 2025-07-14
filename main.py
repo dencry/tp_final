@@ -9,6 +9,9 @@ def main():
     # Creo la base de datoy y la lista
     crear.crear_db()
 
+    # Registro
+    crear.registro("Se inicio el programa.")
+
     while True:
         # Mostro un menu
         mostrar.menu_pricipal()
@@ -44,6 +47,11 @@ def main():
         elif opcion == "7":
             # Salis del programa
             print(Fore.GREEN + "\nGracias por ultilizar el sistema. ¡Hasta luego!\n")
+
+            # Registro
+            crear.registro("Se cerro el programa.")
+
+            # Cierre de aplicacion
             break
 
         else:

@@ -26,19 +26,18 @@ def menu_actualizar():
 def registrar():
     # Muestro un menu para registrar un producto
     print(Fore.CYAN +  "\n=== 'REGISTAR' un nuevo producto ===\n")
+
     #Solicitar datos con validaciones vasicas
     nombre = input("Ingrese el nombre del producto: ").strip().capitalize()
     descripcion = input("Ingrese una breve descripción del producto: ")
     stock = input("Ingrese la cantidad disponible del producto: ").strip()
     precio = input("Ingrese el precio del producto: ").strip()
-    categoria = input("Ingrese la cantidad disponible del producto: ").strip().lower()
+    categoria = input("Ingrese la categoria del producto: ").strip().lower()
 
-    crear.cargar_producto(nombre, descripcion, stock, precio, categoria)
+    crear.cargar_producto(nombre, stock, precio, descripcion, categoria)
 
 def mostrar_lista_de_productos():
-    """
-    Muestra todos los productos de la base de datos.
-    """
+    """ Muestra todos los productos de la base de datos. """
     
     # Sincronizar con la Base de datos
     conexion = sqlite3.connect("productos.db")
@@ -63,9 +62,7 @@ def mostrar_lista_de_productos():
         conexion.close()
 
 def mostrar_producto_por_id():
-    """
-    Mostrar producto por su ID
-    """
+    """ Mostrar producto por su ID """
 
     # Sincronizar con la Base de datos
     conexion = sqlite3.connect("productos.db")
@@ -131,6 +128,9 @@ def reporte_de_productos():
 
     except sqlite3.Error as e:
         print(Fore.RED + f"[ERROR] Se produjo un error: {e}")
+
+        # Registro
+        crear.registro(f"[ERROR] Se produjo un error: {e}")
 
     finally:
         conexion.close()

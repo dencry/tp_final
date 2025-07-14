@@ -1,12 +1,10 @@
-import sqlite3, mostrar
+import sqlite3, mostrar, crear
 from colorama import Fore, init
 
 init(autoreset=True)
 
 def actualizar_un_producto():
-    """
-    Permite eliminar un producto de la lista
-    """
+    """ Permite eliminar un producto de la lista """
 
     #conectar a la base de datos
     conexion = sqlite3.connect("productos.db")
@@ -64,6 +62,9 @@ def actualizar_un_producto():
 
             print(Fore.GREEN + f"\n[EXITO] El producto '{producto[0]}' '{producto[1]}' fue actualizado correctamente.")
 
+            # Registro
+            crear.registro(f"El producto '{producto[0]}' '{producto[1]}' fue actualizado.")
+
         elif opcion == "2":
 
             nuevo_stock = input("\nIngrese el nuevo stock a 'ACTUALIZAR': ")
@@ -88,6 +89,9 @@ def actualizar_un_producto():
             conexion.commit()
 
             print(Fore.GREEN + f"\n[EXITO] El producto '{producto[0]}' '{producto[1]}' fue actualizado correctamente.")
+
+            # Registro
+            crear.registro(f"El producto '{producto[0]}' '{producto[1]}' fue actualizado.")
 
         else:
             print(Fore.RED + "\n[ERROR] Opcion no valida.")

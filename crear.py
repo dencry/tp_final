@@ -1,7 +1,13 @@
-import sqlite3, mostrar
+import sqlite3, mostrar, datetime
 from colorama import Fore, init
 
 init(autoreset=True)
+
+def registro(mensaje):
+    # Registro en archivo de texto
+        archivo = open("nombres.txt", "a", encoding="utf-8")
+        archivo.write(f"[{datetime.datetime.now()}] {mensaje}\n")
+        archivo.close()
 
 def crear_db():
     #Conexion a la base de datos
@@ -27,9 +33,7 @@ def crear_db():
     print(Fore.GREEN + "\n[INFO] La base de datos fue creada con exito!")
 
 def cargar_producto(nombre, stock, precio, descripcion= "None", categoria = "None"):
-    """
-    Solicitar los datos del producto y registrarlo en la base de datos, validando la entrada.
-    """
+    """ Solicitar los datos del producto y registrarlo en la base de datos, validando la entrada. """
 
     #conectar a la base de datos
     conexion = sqlite3.connect("productos.db")
@@ -41,9 +45,15 @@ def cargar_producto(nombre, stock, precio, descripcion= "None", categoria = "Non
             print(Fore.RED + "\n[ERROR] EL nombre no pueden estar vacíos.")
             return
 
-        if not stock.isdigit() or not precio.isdigit():
-            print(Fore.RED + "\n[ERROR] La Cantidad/Precio debe ser numerico.")
+        if not stock.isdigit():
+            print(Fore.RED + "\n[ERROR] La Cantidad debe ser numerico.")
             return
+        
+        if not precio.isdigit():
+            print(Fore.RED + "\n[ERROR] El precio debe ser numerico.")
+            return
+        
+        stock, precio = int(stock), float(precio)
         
         #Insertar en la base de datos
         cursor.execute('''INSERT INTO productos (nombre, descripcion, stock, precio, categoria) VALUES (?, ?, ?, ?, ?)''', (nombre, descripcion, stock, precio, categoria))
@@ -53,9 +63,14 @@ def cargar_producto(nombre, stock, precio, descripcion= "None", categoria = "Non
 
         print(Fore.GREEN + f"\n[EXITO] El producto '{nombre.upper()}' fue agregado correctamente.")
 
-    except sqlite3.Error as e:
+        # Registro
+        registro(f"Se carco un nuevo producto: '{nombre.upper()}'.")
 
+    except sqlite3.Error as e:
         print(Fore.RED + f"\n[ERROR] Error en la base de datos: {e}.")
+
+        # Registro
+        registro(f"\n[ERROR] Error en la base de datos: {e}.")
 
     finally:
         conexion.close()

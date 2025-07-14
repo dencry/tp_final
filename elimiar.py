@@ -1,4 +1,4 @@
-import sqlite3, mostrar
+import sqlite3, mostrar, crear
 from colorama import Fore, init
 
 init(autoreset=True)
@@ -55,8 +55,14 @@ def eliminar_un_producto():
 
         print(Fore.GREEN + f"\n[EXITO] El producto '{producto[0]}' '{producto[1]}' fue eliminado correctamente.")
 
+        # Registro
+        crear.registro(f"Se elimino un producto: '{producto[0]}' '{producto[1]}'.")
+
     except sqlite3.Error as e:
         print(Fore.RED + f"[ERROR] Se produjo un error al eliminar el producto: {e}")
+
+        # Registro
+        crear.registro(f"[ERROR] Se produjo un error al eliminar el producto: {e}")
 
     finally:
         conexion.close()
