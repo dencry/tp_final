@@ -47,7 +47,7 @@ def cargar_producto():
 
         #Validacion
         if not nombre:
-            print(Fore.RED + "\n[ERROR] EL nombre, descripcion y categotia no pueden estar vacíos.")
+            print(Fore.RED + "\n[ERROR] EL nombre no pueden estar vacíos.")
             return
 
         if not descripcion:
