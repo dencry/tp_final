@@ -5,7 +5,7 @@ init(autoreset=True)
 
 def registro(mensaje):
     # Registro en archivo de texto
-        archivo = open("nombres.txt", "a", encoding="utf-8")
+        archivo = open("registro.txt", "a", encoding="utf-8")
         archivo.write(f"[{datetime.datetime.now()}] {mensaje}\n")
         archivo.close()
 
